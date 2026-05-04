@@ -12,15 +12,23 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SigninRouteImport } from './routes/signin'
 import { Route as BusinessRouteImport } from './routes/business'
+import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BusinessIndexRouteImport } from './routes/business.index'
+import { Route as AgentsIndexRouteImport } from './routes/agents.index'
 import { Route as SignupPendingRouteImport } from './routes/signup.pending'
 import { Route as BusinessWalletRouteImport } from './routes/business.wallet'
 import { Route as BusinessSupportRouteImport } from './routes/business.support'
 import { Route as BusinessRequestsRouteImport } from './routes/business.requests'
 import { Route as BusinessProfileRouteImport } from './routes/business.profile'
 import { Route as BusinessNewRequestRouteImport } from './routes/business.new-request'
+import { Route as AgentsSignupRouteImport } from './routes/agents.signup'
+import { Route as AgentsRequestsRouteImport } from './routes/agents.requests'
+import { Route as AgentsMessagesRouteImport } from './routes/agents.messages'
+import { Route as AgentsInvoicesRouteImport } from './routes/agents.invoices'
+import { Route as AgentsComplianceRouteImport } from './routes/agents.compliance'
 import { Route as BusinessRequestsIdRouteImport } from './routes/business.requests.$id'
+import { Route as AgentsRequestsIdRouteImport } from './routes/agents.requests.$id'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -37,6 +45,11 @@ const BusinessRoute = BusinessRouteImport.update({
   path: '/business',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AgentsRoute = AgentsRouteImport.update({
+  id: '/agents',
+  path: '/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -46,6 +59,11 @@ const BusinessIndexRoute = BusinessIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => BusinessRoute,
+} as any)
+const AgentsIndexRoute = AgentsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AgentsRoute,
 } as any)
 const SignupPendingRoute = SignupPendingRouteImport.update({
   id: '/pending',
@@ -77,100 +95,177 @@ const BusinessNewRequestRoute = BusinessNewRequestRouteImport.update({
   path: '/new-request',
   getParentRoute: () => BusinessRoute,
 } as any)
+const AgentsSignupRoute = AgentsSignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => AgentsRoute,
+} as any)
+const AgentsRequestsRoute = AgentsRequestsRouteImport.update({
+  id: '/requests',
+  path: '/requests',
+  getParentRoute: () => AgentsRoute,
+} as any)
+const AgentsMessagesRoute = AgentsMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => AgentsRoute,
+} as any)
+const AgentsInvoicesRoute = AgentsInvoicesRouteImport.update({
+  id: '/invoices',
+  path: '/invoices',
+  getParentRoute: () => AgentsRoute,
+} as any)
+const AgentsComplianceRoute = AgentsComplianceRouteImport.update({
+  id: '/compliance',
+  path: '/compliance',
+  getParentRoute: () => AgentsRoute,
+} as any)
 const BusinessRequestsIdRoute = BusinessRequestsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => BusinessRequestsRoute,
 } as any)
+const AgentsRequestsIdRoute = AgentsRequestsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AgentsRequestsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agents': typeof AgentsRouteWithChildren
   '/business': typeof BusinessRouteWithChildren
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRouteWithChildren
+  '/agents/compliance': typeof AgentsComplianceRoute
+  '/agents/invoices': typeof AgentsInvoicesRoute
+  '/agents/messages': typeof AgentsMessagesRoute
+  '/agents/requests': typeof AgentsRequestsRouteWithChildren
+  '/agents/signup': typeof AgentsSignupRoute
   '/business/new-request': typeof BusinessNewRequestRoute
   '/business/profile': typeof BusinessProfileRoute
   '/business/requests': typeof BusinessRequestsRouteWithChildren
   '/business/support': typeof BusinessSupportRoute
   '/business/wallet': typeof BusinessWalletRoute
   '/signup/pending': typeof SignupPendingRoute
+  '/agents/': typeof AgentsIndexRoute
   '/business/': typeof BusinessIndexRoute
+  '/agents/requests/$id': typeof AgentsRequestsIdRoute
   '/business/requests/$id': typeof BusinessRequestsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRouteWithChildren
+  '/agents/compliance': typeof AgentsComplianceRoute
+  '/agents/invoices': typeof AgentsInvoicesRoute
+  '/agents/messages': typeof AgentsMessagesRoute
+  '/agents/requests': typeof AgentsRequestsRouteWithChildren
+  '/agents/signup': typeof AgentsSignupRoute
   '/business/new-request': typeof BusinessNewRequestRoute
   '/business/profile': typeof BusinessProfileRoute
   '/business/requests': typeof BusinessRequestsRouteWithChildren
   '/business/support': typeof BusinessSupportRoute
   '/business/wallet': typeof BusinessWalletRoute
   '/signup/pending': typeof SignupPendingRoute
+  '/agents': typeof AgentsIndexRoute
   '/business': typeof BusinessIndexRoute
+  '/agents/requests/$id': typeof AgentsRequestsIdRoute
   '/business/requests/$id': typeof BusinessRequestsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agents': typeof AgentsRouteWithChildren
   '/business': typeof BusinessRouteWithChildren
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRouteWithChildren
+  '/agents/compliance': typeof AgentsComplianceRoute
+  '/agents/invoices': typeof AgentsInvoicesRoute
+  '/agents/messages': typeof AgentsMessagesRoute
+  '/agents/requests': typeof AgentsRequestsRouteWithChildren
+  '/agents/signup': typeof AgentsSignupRoute
   '/business/new-request': typeof BusinessNewRequestRoute
   '/business/profile': typeof BusinessProfileRoute
   '/business/requests': typeof BusinessRequestsRouteWithChildren
   '/business/support': typeof BusinessSupportRoute
   '/business/wallet': typeof BusinessWalletRoute
   '/signup/pending': typeof SignupPendingRoute
+  '/agents/': typeof AgentsIndexRoute
   '/business/': typeof BusinessIndexRoute
+  '/agents/requests/$id': typeof AgentsRequestsIdRoute
   '/business/requests/$id': typeof BusinessRequestsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/agents'
     | '/business'
     | '/signin'
     | '/signup'
+    | '/agents/compliance'
+    | '/agents/invoices'
+    | '/agents/messages'
+    | '/agents/requests'
+    | '/agents/signup'
     | '/business/new-request'
     | '/business/profile'
     | '/business/requests'
     | '/business/support'
     | '/business/wallet'
     | '/signup/pending'
+    | '/agents/'
     | '/business/'
+    | '/agents/requests/$id'
     | '/business/requests/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/signin'
     | '/signup'
+    | '/agents/compliance'
+    | '/agents/invoices'
+    | '/agents/messages'
+    | '/agents/requests'
+    | '/agents/signup'
     | '/business/new-request'
     | '/business/profile'
     | '/business/requests'
     | '/business/support'
     | '/business/wallet'
     | '/signup/pending'
+    | '/agents'
     | '/business'
+    | '/agents/requests/$id'
     | '/business/requests/$id'
   id:
     | '__root__'
     | '/'
+    | '/agents'
     | '/business'
     | '/signin'
     | '/signup'
+    | '/agents/compliance'
+    | '/agents/invoices'
+    | '/agents/messages'
+    | '/agents/requests'
+    | '/agents/signup'
     | '/business/new-request'
     | '/business/profile'
     | '/business/requests'
     | '/business/support'
     | '/business/wallet'
     | '/signup/pending'
+    | '/agents/'
     | '/business/'
+    | '/agents/requests/$id'
     | '/business/requests/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgentsRoute: typeof AgentsRouteWithChildren
   BusinessRoute: typeof BusinessRouteWithChildren
   SigninRoute: typeof SigninRoute
   SignupRoute: typeof SignupRouteWithChildren
@@ -199,6 +294,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BusinessRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/agents': {
+      id: '/agents'
+      path: '/agents'
+      fullPath: '/agents'
+      preLoaderRoute: typeof AgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -212,6 +314,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/business/'
       preLoaderRoute: typeof BusinessIndexRouteImport
       parentRoute: typeof BusinessRoute
+    }
+    '/agents/': {
+      id: '/agents/'
+      path: '/'
+      fullPath: '/agents/'
+      preLoaderRoute: typeof AgentsIndexRouteImport
+      parentRoute: typeof AgentsRoute
     }
     '/signup/pending': {
       id: '/signup/pending'
@@ -255,6 +364,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BusinessNewRequestRouteImport
       parentRoute: typeof BusinessRoute
     }
+    '/agents/signup': {
+      id: '/agents/signup'
+      path: '/signup'
+      fullPath: '/agents/signup'
+      preLoaderRoute: typeof AgentsSignupRouteImport
+      parentRoute: typeof AgentsRoute
+    }
+    '/agents/requests': {
+      id: '/agents/requests'
+      path: '/requests'
+      fullPath: '/agents/requests'
+      preLoaderRoute: typeof AgentsRequestsRouteImport
+      parentRoute: typeof AgentsRoute
+    }
+    '/agents/messages': {
+      id: '/agents/messages'
+      path: '/messages'
+      fullPath: '/agents/messages'
+      preLoaderRoute: typeof AgentsMessagesRouteImport
+      parentRoute: typeof AgentsRoute
+    }
+    '/agents/invoices': {
+      id: '/agents/invoices'
+      path: '/invoices'
+      fullPath: '/agents/invoices'
+      preLoaderRoute: typeof AgentsInvoicesRouteImport
+      parentRoute: typeof AgentsRoute
+    }
+    '/agents/compliance': {
+      id: '/agents/compliance'
+      path: '/compliance'
+      fullPath: '/agents/compliance'
+      preLoaderRoute: typeof AgentsComplianceRouteImport
+      parentRoute: typeof AgentsRoute
+    }
     '/business/requests/$id': {
       id: '/business/requests/$id'
       path: '/$id'
@@ -262,8 +406,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BusinessRequestsIdRouteImport
       parentRoute: typeof BusinessRequestsRoute
     }
+    '/agents/requests/$id': {
+      id: '/agents/requests/$id'
+      path: '/$id'
+      fullPath: '/agents/requests/$id'
+      preLoaderRoute: typeof AgentsRequestsIdRouteImport
+      parentRoute: typeof AgentsRequestsRoute
+    }
   }
 }
+
+interface AgentsRequestsRouteChildren {
+  AgentsRequestsIdRoute: typeof AgentsRequestsIdRoute
+}
+
+const AgentsRequestsRouteChildren: AgentsRequestsRouteChildren = {
+  AgentsRequestsIdRoute: AgentsRequestsIdRoute,
+}
+
+const AgentsRequestsRouteWithChildren = AgentsRequestsRoute._addFileChildren(
+  AgentsRequestsRouteChildren,
+)
+
+interface AgentsRouteChildren {
+  AgentsComplianceRoute: typeof AgentsComplianceRoute
+  AgentsInvoicesRoute: typeof AgentsInvoicesRoute
+  AgentsMessagesRoute: typeof AgentsMessagesRoute
+  AgentsRequestsRoute: typeof AgentsRequestsRouteWithChildren
+  AgentsSignupRoute: typeof AgentsSignupRoute
+  AgentsIndexRoute: typeof AgentsIndexRoute
+}
+
+const AgentsRouteChildren: AgentsRouteChildren = {
+  AgentsComplianceRoute: AgentsComplianceRoute,
+  AgentsInvoicesRoute: AgentsInvoicesRoute,
+  AgentsMessagesRoute: AgentsMessagesRoute,
+  AgentsRequestsRoute: AgentsRequestsRouteWithChildren,
+  AgentsSignupRoute: AgentsSignupRoute,
+  AgentsIndexRoute: AgentsIndexRoute,
+}
+
+const AgentsRouteWithChildren =
+  AgentsRoute._addFileChildren(AgentsRouteChildren)
 
 interface BusinessRequestsRouteChildren {
   BusinessRequestsIdRoute: typeof BusinessRequestsIdRoute
@@ -311,6 +495,7 @@ const SignupRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgentsRoute: AgentsRouteWithChildren,
   BusinessRoute: BusinessRouteWithChildren,
   SigninRoute: SigninRoute,
   SignupRoute: SignupRouteWithChildren,

@@ -15,6 +15,12 @@ import { Route as BusinessRouteImport } from './routes/business'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BusinessIndexRouteImport } from './routes/business.index'
 import { Route as SignupPendingRouteImport } from './routes/signup.pending'
+import { Route as BusinessWalletRouteImport } from './routes/business.wallet'
+import { Route as BusinessSupportRouteImport } from './routes/business.support'
+import { Route as BusinessRequestsRouteImport } from './routes/business.requests'
+import { Route as BusinessProfileRouteImport } from './routes/business.profile'
+import { Route as BusinessNewRequestRouteImport } from './routes/business.new-request'
+import { Route as BusinessRequestsIdRouteImport } from './routes/business.requests.$id'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -46,21 +52,63 @@ const SignupPendingRoute = SignupPendingRouteImport.update({
   path: '/pending',
   getParentRoute: () => SignupRoute,
 } as any)
+const BusinessWalletRoute = BusinessWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessSupportRoute = BusinessSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessRequestsRoute = BusinessRequestsRouteImport.update({
+  id: '/requests',
+  path: '/requests',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessProfileRoute = BusinessProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessNewRequestRoute = BusinessNewRequestRouteImport.update({
+  id: '/new-request',
+  path: '/new-request',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessRequestsIdRoute = BusinessRequestsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => BusinessRequestsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/business': typeof BusinessRouteWithChildren
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRouteWithChildren
+  '/business/new-request': typeof BusinessNewRequestRoute
+  '/business/profile': typeof BusinessProfileRoute
+  '/business/requests': typeof BusinessRequestsRouteWithChildren
+  '/business/support': typeof BusinessSupportRoute
+  '/business/wallet': typeof BusinessWalletRoute
   '/signup/pending': typeof SignupPendingRoute
   '/business/': typeof BusinessIndexRoute
+  '/business/requests/$id': typeof BusinessRequestsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRouteWithChildren
+  '/business/new-request': typeof BusinessNewRequestRoute
+  '/business/profile': typeof BusinessProfileRoute
+  '/business/requests': typeof BusinessRequestsRouteWithChildren
+  '/business/support': typeof BusinessSupportRoute
+  '/business/wallet': typeof BusinessWalletRoute
   '/signup/pending': typeof SignupPendingRoute
   '/business': typeof BusinessIndexRoute
+  '/business/requests/$id': typeof BusinessRequestsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -68,8 +116,14 @@ export interface FileRoutesById {
   '/business': typeof BusinessRouteWithChildren
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRouteWithChildren
+  '/business/new-request': typeof BusinessNewRequestRoute
+  '/business/profile': typeof BusinessProfileRoute
+  '/business/requests': typeof BusinessRequestsRouteWithChildren
+  '/business/support': typeof BusinessSupportRoute
+  '/business/wallet': typeof BusinessWalletRoute
   '/signup/pending': typeof SignupPendingRoute
   '/business/': typeof BusinessIndexRoute
+  '/business/requests/$id': typeof BusinessRequestsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -78,18 +132,41 @@ export interface FileRouteTypes {
     | '/business'
     | '/signin'
     | '/signup'
+    | '/business/new-request'
+    | '/business/profile'
+    | '/business/requests'
+    | '/business/support'
+    | '/business/wallet'
     | '/signup/pending'
     | '/business/'
+    | '/business/requests/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/signin' | '/signup' | '/signup/pending' | '/business'
+  to:
+    | '/'
+    | '/signin'
+    | '/signup'
+    | '/business/new-request'
+    | '/business/profile'
+    | '/business/requests'
+    | '/business/support'
+    | '/business/wallet'
+    | '/signup/pending'
+    | '/business'
+    | '/business/requests/$id'
   id:
     | '__root__'
     | '/'
     | '/business'
     | '/signin'
     | '/signup'
+    | '/business/new-request'
+    | '/business/profile'
+    | '/business/requests'
+    | '/business/support'
+    | '/business/wallet'
     | '/signup/pending'
     | '/business/'
+    | '/business/requests/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -143,14 +220,77 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupPendingRouteImport
       parentRoute: typeof SignupRoute
     }
+    '/business/wallet': {
+      id: '/business/wallet'
+      path: '/wallet'
+      fullPath: '/business/wallet'
+      preLoaderRoute: typeof BusinessWalletRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/support': {
+      id: '/business/support'
+      path: '/support'
+      fullPath: '/business/support'
+      preLoaderRoute: typeof BusinessSupportRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/requests': {
+      id: '/business/requests'
+      path: '/requests'
+      fullPath: '/business/requests'
+      preLoaderRoute: typeof BusinessRequestsRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/profile': {
+      id: '/business/profile'
+      path: '/profile'
+      fullPath: '/business/profile'
+      preLoaderRoute: typeof BusinessProfileRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/new-request': {
+      id: '/business/new-request'
+      path: '/new-request'
+      fullPath: '/business/new-request'
+      preLoaderRoute: typeof BusinessNewRequestRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/requests/$id': {
+      id: '/business/requests/$id'
+      path: '/$id'
+      fullPath: '/business/requests/$id'
+      preLoaderRoute: typeof BusinessRequestsIdRouteImport
+      parentRoute: typeof BusinessRequestsRoute
+    }
   }
 }
 
+interface BusinessRequestsRouteChildren {
+  BusinessRequestsIdRoute: typeof BusinessRequestsIdRoute
+}
+
+const BusinessRequestsRouteChildren: BusinessRequestsRouteChildren = {
+  BusinessRequestsIdRoute: BusinessRequestsIdRoute,
+}
+
+const BusinessRequestsRouteWithChildren =
+  BusinessRequestsRoute._addFileChildren(BusinessRequestsRouteChildren)
+
 interface BusinessRouteChildren {
+  BusinessNewRequestRoute: typeof BusinessNewRequestRoute
+  BusinessProfileRoute: typeof BusinessProfileRoute
+  BusinessRequestsRoute: typeof BusinessRequestsRouteWithChildren
+  BusinessSupportRoute: typeof BusinessSupportRoute
+  BusinessWalletRoute: typeof BusinessWalletRoute
   BusinessIndexRoute: typeof BusinessIndexRoute
 }
 
 const BusinessRouteChildren: BusinessRouteChildren = {
+  BusinessNewRequestRoute: BusinessNewRequestRoute,
+  BusinessProfileRoute: BusinessProfileRoute,
+  BusinessRequestsRoute: BusinessRequestsRouteWithChildren,
+  BusinessSupportRoute: BusinessSupportRoute,
+  BusinessWalletRoute: BusinessWalletRoute,
   BusinessIndexRoute: BusinessIndexRoute,
 }
 

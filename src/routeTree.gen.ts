@@ -9,38 +9,412 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SigninRouteImport } from './routes/signin'
+import { Route as BusinessRouteImport } from './routes/business'
+import { Route as AgentsRouteImport } from './routes/agents'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BusinessIndexRouteImport } from './routes/business.index'
+import { Route as AgentsIndexRouteImport } from './routes/agents.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as SignupPendingRouteImport } from './routes/signup.pending'
+import { Route as BusinessWalletRouteImport } from './routes/business.wallet'
+import { Route as BusinessSupportRouteImport } from './routes/business.support'
+import { Route as BusinessRequestsRouteImport } from './routes/business.requests'
+import { Route as BusinessProfileRouteImport } from './routes/business.profile'
+import { Route as BusinessNewRequestRouteImport } from './routes/business.new-request'
+import { Route as AgentsSignupRouteImport } from './routes/agents.signup'
+import { Route as AgentsRequestsRouteImport } from './routes/agents.requests'
+import { Route as AgentsMessagesRouteImport } from './routes/agents.messages'
+import { Route as AgentsInvoicesRouteImport } from './routes/agents.invoices'
+import { Route as AgentsComplianceRouteImport } from './routes/agents.compliance'
+import { Route as AdminWalletsRouteImport } from './routes/admin.wallets'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminTicketsRouteImport } from './routes/admin.tickets'
+import { Route as AdminRequestsRouteImport } from './routes/admin.requests'
+import { Route as AdminReportsRouteImport } from './routes/admin.reports'
+import { Route as AdminConfigRouteImport } from './routes/admin.config'
+import { Route as AdminCommunicationRouteImport } from './routes/admin.communication'
+import { Route as BusinessRequestsIdRouteImport } from './routes/business.requests.$id'
+import { Route as AgentsRequestsIdRouteImport } from './routes/agents.requests.$id'
 
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SigninRoute = SigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BusinessRoute = BusinessRouteImport.update({
+  id: '/business',
+  path: '/business',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentsRoute = AgentsRouteImport.update({
+  id: '/agents',
+  path: '/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BusinessIndexRoute = BusinessIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const AgentsIndexRoute = AgentsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AgentsRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const SignupPendingRoute = SignupPendingRouteImport.update({
+  id: '/pending',
+  path: '/pending',
+  getParentRoute: () => SignupRoute,
+} as any)
+const BusinessWalletRoute = BusinessWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessSupportRoute = BusinessSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessRequestsRoute = BusinessRequestsRouteImport.update({
+  id: '/requests',
+  path: '/requests',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessProfileRoute = BusinessProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessNewRequestRoute = BusinessNewRequestRouteImport.update({
+  id: '/new-request',
+  path: '/new-request',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const AgentsSignupRoute = AgentsSignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => AgentsRoute,
+} as any)
+const AgentsRequestsRoute = AgentsRequestsRouteImport.update({
+  id: '/requests',
+  path: '/requests',
+  getParentRoute: () => AgentsRoute,
+} as any)
+const AgentsMessagesRoute = AgentsMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => AgentsRoute,
+} as any)
+const AgentsInvoicesRoute = AgentsInvoicesRouteImport.update({
+  id: '/invoices',
+  path: '/invoices',
+  getParentRoute: () => AgentsRoute,
+} as any)
+const AgentsComplianceRoute = AgentsComplianceRouteImport.update({
+  id: '/compliance',
+  path: '/compliance',
+  getParentRoute: () => AgentsRoute,
+} as any)
+const AdminWalletsRoute = AdminWalletsRouteImport.update({
+  id: '/wallets',
+  path: '/wallets',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTicketsRoute = AdminTicketsRouteImport.update({
+  id: '/tickets',
+  path: '/tickets',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRequestsRoute = AdminRequestsRouteImport.update({
+  id: '/requests',
+  path: '/requests',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReportsRoute = AdminReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminConfigRoute = AdminConfigRouteImport.update({
+  id: '/config',
+  path: '/config',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCommunicationRoute = AdminCommunicationRouteImport.update({
+  id: '/communication',
+  path: '/communication',
+  getParentRoute: () => AdminRoute,
+} as any)
+const BusinessRequestsIdRoute = BusinessRequestsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => BusinessRequestsRoute,
+} as any)
+const AgentsRequestsIdRoute = AgentsRequestsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AgentsRequestsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/agents': typeof AgentsRouteWithChildren
+  '/business': typeof BusinessRouteWithChildren
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRouteWithChildren
+  '/admin/communication': typeof AdminCommunicationRoute
+  '/admin/config': typeof AdminConfigRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/requests': typeof AdminRequestsRoute
+  '/admin/tickets': typeof AdminTicketsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/wallets': typeof AdminWalletsRoute
+  '/agents/compliance': typeof AgentsComplianceRoute
+  '/agents/invoices': typeof AgentsInvoicesRoute
+  '/agents/messages': typeof AgentsMessagesRoute
+  '/agents/requests': typeof AgentsRequestsRouteWithChildren
+  '/agents/signup': typeof AgentsSignupRoute
+  '/business/new-request': typeof BusinessNewRequestRoute
+  '/business/profile': typeof BusinessProfileRoute
+  '/business/requests': typeof BusinessRequestsRouteWithChildren
+  '/business/support': typeof BusinessSupportRoute
+  '/business/wallet': typeof BusinessWalletRoute
+  '/signup/pending': typeof SignupPendingRoute
+  '/admin/': typeof AdminIndexRoute
+  '/agents/': typeof AgentsIndexRoute
+  '/business/': typeof BusinessIndexRoute
+  '/agents/requests/$id': typeof AgentsRequestsIdRoute
+  '/business/requests/$id': typeof BusinessRequestsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRouteWithChildren
+  '/admin/communication': typeof AdminCommunicationRoute
+  '/admin/config': typeof AdminConfigRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/requests': typeof AdminRequestsRoute
+  '/admin/tickets': typeof AdminTicketsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/wallets': typeof AdminWalletsRoute
+  '/agents/compliance': typeof AgentsComplianceRoute
+  '/agents/invoices': typeof AgentsInvoicesRoute
+  '/agents/messages': typeof AgentsMessagesRoute
+  '/agents/requests': typeof AgentsRequestsRouteWithChildren
+  '/agents/signup': typeof AgentsSignupRoute
+  '/business/new-request': typeof BusinessNewRequestRoute
+  '/business/profile': typeof BusinessProfileRoute
+  '/business/requests': typeof BusinessRequestsRouteWithChildren
+  '/business/support': typeof BusinessSupportRoute
+  '/business/wallet': typeof BusinessWalletRoute
+  '/signup/pending': typeof SignupPendingRoute
+  '/admin': typeof AdminIndexRoute
+  '/agents': typeof AgentsIndexRoute
+  '/business': typeof BusinessIndexRoute
+  '/agents/requests/$id': typeof AgentsRequestsIdRoute
+  '/business/requests/$id': typeof BusinessRequestsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/agents': typeof AgentsRouteWithChildren
+  '/business': typeof BusinessRouteWithChildren
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRouteWithChildren
+  '/admin/communication': typeof AdminCommunicationRoute
+  '/admin/config': typeof AdminConfigRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/requests': typeof AdminRequestsRoute
+  '/admin/tickets': typeof AdminTicketsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/wallets': typeof AdminWalletsRoute
+  '/agents/compliance': typeof AgentsComplianceRoute
+  '/agents/invoices': typeof AgentsInvoicesRoute
+  '/agents/messages': typeof AgentsMessagesRoute
+  '/agents/requests': typeof AgentsRequestsRouteWithChildren
+  '/agents/signup': typeof AgentsSignupRoute
+  '/business/new-request': typeof BusinessNewRequestRoute
+  '/business/profile': typeof BusinessProfileRoute
+  '/business/requests': typeof BusinessRequestsRouteWithChildren
+  '/business/support': typeof BusinessSupportRoute
+  '/business/wallet': typeof BusinessWalletRoute
+  '/signup/pending': typeof SignupPendingRoute
+  '/admin/': typeof AdminIndexRoute
+  '/agents/': typeof AgentsIndexRoute
+  '/business/': typeof BusinessIndexRoute
+  '/agents/requests/$id': typeof AgentsRequestsIdRoute
+  '/business/requests/$id': typeof BusinessRequestsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/agents'
+    | '/business'
+    | '/signin'
+    | '/signup'
+    | '/admin/communication'
+    | '/admin/config'
+    | '/admin/reports'
+    | '/admin/requests'
+    | '/admin/tickets'
+    | '/admin/users'
+    | '/admin/wallets'
+    | '/agents/compliance'
+    | '/agents/invoices'
+    | '/agents/messages'
+    | '/agents/requests'
+    | '/agents/signup'
+    | '/business/new-request'
+    | '/business/profile'
+    | '/business/requests'
+    | '/business/support'
+    | '/business/wallet'
+    | '/signup/pending'
+    | '/admin/'
+    | '/agents/'
+    | '/business/'
+    | '/agents/requests/$id'
+    | '/business/requests/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/signin'
+    | '/signup'
+    | '/admin/communication'
+    | '/admin/config'
+    | '/admin/reports'
+    | '/admin/requests'
+    | '/admin/tickets'
+    | '/admin/users'
+    | '/admin/wallets'
+    | '/agents/compliance'
+    | '/agents/invoices'
+    | '/agents/messages'
+    | '/agents/requests'
+    | '/agents/signup'
+    | '/business/new-request'
+    | '/business/profile'
+    | '/business/requests'
+    | '/business/support'
+    | '/business/wallet'
+    | '/signup/pending'
+    | '/admin'
+    | '/agents'
+    | '/business'
+    | '/agents/requests/$id'
+    | '/business/requests/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/agents'
+    | '/business'
+    | '/signin'
+    | '/signup'
+    | '/admin/communication'
+    | '/admin/config'
+    | '/admin/reports'
+    | '/admin/requests'
+    | '/admin/tickets'
+    | '/admin/users'
+    | '/admin/wallets'
+    | '/agents/compliance'
+    | '/agents/invoices'
+    | '/agents/messages'
+    | '/agents/requests'
+    | '/agents/signup'
+    | '/business/new-request'
+    | '/business/profile'
+    | '/business/requests'
+    | '/business/support'
+    | '/business/wallet'
+    | '/signup/pending'
+    | '/admin/'
+    | '/agents/'
+    | '/business/'
+    | '/agents/requests/$id'
+    | '/business/requests/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  AgentsRoute: typeof AgentsRouteWithChildren
+  BusinessRoute: typeof BusinessRouteWithChildren
+  SigninRoute: typeof SigninRoute
+  SignupRoute: typeof SignupRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signin': {
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/business': {
+      id: '/business'
+      path: '/business'
+      fullPath: '/business'
+      preLoaderRoute: typeof BusinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agents': {
+      id: '/agents'
+      path: '/agents'
+      fullPath: '/agents'
+      preLoaderRoute: typeof AgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +422,278 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/business/': {
+      id: '/business/'
+      path: '/'
+      fullPath: '/business/'
+      preLoaderRoute: typeof BusinessIndexRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/agents/': {
+      id: '/agents/'
+      path: '/'
+      fullPath: '/agents/'
+      preLoaderRoute: typeof AgentsIndexRouteImport
+      parentRoute: typeof AgentsRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/signup/pending': {
+      id: '/signup/pending'
+      path: '/pending'
+      fullPath: '/signup/pending'
+      preLoaderRoute: typeof SignupPendingRouteImport
+      parentRoute: typeof SignupRoute
+    }
+    '/business/wallet': {
+      id: '/business/wallet'
+      path: '/wallet'
+      fullPath: '/business/wallet'
+      preLoaderRoute: typeof BusinessWalletRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/support': {
+      id: '/business/support'
+      path: '/support'
+      fullPath: '/business/support'
+      preLoaderRoute: typeof BusinessSupportRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/requests': {
+      id: '/business/requests'
+      path: '/requests'
+      fullPath: '/business/requests'
+      preLoaderRoute: typeof BusinessRequestsRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/profile': {
+      id: '/business/profile'
+      path: '/profile'
+      fullPath: '/business/profile'
+      preLoaderRoute: typeof BusinessProfileRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/new-request': {
+      id: '/business/new-request'
+      path: '/new-request'
+      fullPath: '/business/new-request'
+      preLoaderRoute: typeof BusinessNewRequestRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/agents/signup': {
+      id: '/agents/signup'
+      path: '/signup'
+      fullPath: '/agents/signup'
+      preLoaderRoute: typeof AgentsSignupRouteImport
+      parentRoute: typeof AgentsRoute
+    }
+    '/agents/requests': {
+      id: '/agents/requests'
+      path: '/requests'
+      fullPath: '/agents/requests'
+      preLoaderRoute: typeof AgentsRequestsRouteImport
+      parentRoute: typeof AgentsRoute
+    }
+    '/agents/messages': {
+      id: '/agents/messages'
+      path: '/messages'
+      fullPath: '/agents/messages'
+      preLoaderRoute: typeof AgentsMessagesRouteImport
+      parentRoute: typeof AgentsRoute
+    }
+    '/agents/invoices': {
+      id: '/agents/invoices'
+      path: '/invoices'
+      fullPath: '/agents/invoices'
+      preLoaderRoute: typeof AgentsInvoicesRouteImport
+      parentRoute: typeof AgentsRoute
+    }
+    '/agents/compliance': {
+      id: '/agents/compliance'
+      path: '/compliance'
+      fullPath: '/agents/compliance'
+      preLoaderRoute: typeof AgentsComplianceRouteImport
+      parentRoute: typeof AgentsRoute
+    }
+    '/admin/wallets': {
+      id: '/admin/wallets'
+      path: '/wallets'
+      fullPath: '/admin/wallets'
+      preLoaderRoute: typeof AdminWalletsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/tickets': {
+      id: '/admin/tickets'
+      path: '/tickets'
+      fullPath: '/admin/tickets'
+      preLoaderRoute: typeof AdminTicketsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/requests': {
+      id: '/admin/requests'
+      path: '/requests'
+      fullPath: '/admin/requests'
+      preLoaderRoute: typeof AdminRequestsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reports': {
+      id: '/admin/reports'
+      path: '/reports'
+      fullPath: '/admin/reports'
+      preLoaderRoute: typeof AdminReportsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/config': {
+      id: '/admin/config'
+      path: '/config'
+      fullPath: '/admin/config'
+      preLoaderRoute: typeof AdminConfigRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/communication': {
+      id: '/admin/communication'
+      path: '/communication'
+      fullPath: '/admin/communication'
+      preLoaderRoute: typeof AdminCommunicationRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/business/requests/$id': {
+      id: '/business/requests/$id'
+      path: '/$id'
+      fullPath: '/business/requests/$id'
+      preLoaderRoute: typeof BusinessRequestsIdRouteImport
+      parentRoute: typeof BusinessRequestsRoute
+    }
+    '/agents/requests/$id': {
+      id: '/agents/requests/$id'
+      path: '/$id'
+      fullPath: '/agents/requests/$id'
+      preLoaderRoute: typeof AgentsRequestsIdRouteImport
+      parentRoute: typeof AgentsRequestsRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminCommunicationRoute: typeof AdminCommunicationRoute
+  AdminConfigRoute: typeof AdminConfigRoute
+  AdminReportsRoute: typeof AdminReportsRoute
+  AdminRequestsRoute: typeof AdminRequestsRoute
+  AdminTicketsRoute: typeof AdminTicketsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminWalletsRoute: typeof AdminWalletsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminCommunicationRoute: AdminCommunicationRoute,
+  AdminConfigRoute: AdminConfigRoute,
+  AdminReportsRoute: AdminReportsRoute,
+  AdminRequestsRoute: AdminRequestsRoute,
+  AdminTicketsRoute: AdminTicketsRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminWalletsRoute: AdminWalletsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface AgentsRequestsRouteChildren {
+  AgentsRequestsIdRoute: typeof AgentsRequestsIdRoute
+}
+
+const AgentsRequestsRouteChildren: AgentsRequestsRouteChildren = {
+  AgentsRequestsIdRoute: AgentsRequestsIdRoute,
+}
+
+const AgentsRequestsRouteWithChildren = AgentsRequestsRoute._addFileChildren(
+  AgentsRequestsRouteChildren,
+)
+
+interface AgentsRouteChildren {
+  AgentsComplianceRoute: typeof AgentsComplianceRoute
+  AgentsInvoicesRoute: typeof AgentsInvoicesRoute
+  AgentsMessagesRoute: typeof AgentsMessagesRoute
+  AgentsRequestsRoute: typeof AgentsRequestsRouteWithChildren
+  AgentsSignupRoute: typeof AgentsSignupRoute
+  AgentsIndexRoute: typeof AgentsIndexRoute
+}
+
+const AgentsRouteChildren: AgentsRouteChildren = {
+  AgentsComplianceRoute: AgentsComplianceRoute,
+  AgentsInvoicesRoute: AgentsInvoicesRoute,
+  AgentsMessagesRoute: AgentsMessagesRoute,
+  AgentsRequestsRoute: AgentsRequestsRouteWithChildren,
+  AgentsSignupRoute: AgentsSignupRoute,
+  AgentsIndexRoute: AgentsIndexRoute,
+}
+
+const AgentsRouteWithChildren =
+  AgentsRoute._addFileChildren(AgentsRouteChildren)
+
+interface BusinessRequestsRouteChildren {
+  BusinessRequestsIdRoute: typeof BusinessRequestsIdRoute
+}
+
+const BusinessRequestsRouteChildren: BusinessRequestsRouteChildren = {
+  BusinessRequestsIdRoute: BusinessRequestsIdRoute,
+}
+
+const BusinessRequestsRouteWithChildren =
+  BusinessRequestsRoute._addFileChildren(BusinessRequestsRouteChildren)
+
+interface BusinessRouteChildren {
+  BusinessNewRequestRoute: typeof BusinessNewRequestRoute
+  BusinessProfileRoute: typeof BusinessProfileRoute
+  BusinessRequestsRoute: typeof BusinessRequestsRouteWithChildren
+  BusinessSupportRoute: typeof BusinessSupportRoute
+  BusinessWalletRoute: typeof BusinessWalletRoute
+  BusinessIndexRoute: typeof BusinessIndexRoute
+}
+
+const BusinessRouteChildren: BusinessRouteChildren = {
+  BusinessNewRequestRoute: BusinessNewRequestRoute,
+  BusinessProfileRoute: BusinessProfileRoute,
+  BusinessRequestsRoute: BusinessRequestsRouteWithChildren,
+  BusinessSupportRoute: BusinessSupportRoute,
+  BusinessWalletRoute: BusinessWalletRoute,
+  BusinessIndexRoute: BusinessIndexRoute,
+}
+
+const BusinessRouteWithChildren = BusinessRoute._addFileChildren(
+  BusinessRouteChildren,
+)
+
+interface SignupRouteChildren {
+  SignupPendingRoute: typeof SignupPendingRoute
+}
+
+const SignupRouteChildren: SignupRouteChildren = {
+  SignupPendingRoute: SignupPendingRoute,
+}
+
+const SignupRouteWithChildren =
+  SignupRoute._addFileChildren(SignupRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  AgentsRoute: AgentsRouteWithChildren,
+  BusinessRoute: BusinessRouteWithChildren,
+  SigninRoute: SigninRoute,
+  SignupRoute: SignupRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -13,9 +13,11 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SigninRouteImport } from './routes/signin'
 import { Route as BusinessRouteImport } from './routes/business'
 import { Route as AgentsRouteImport } from './routes/agents'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BusinessIndexRouteImport } from './routes/business.index'
 import { Route as AgentsIndexRouteImport } from './routes/agents.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as SignupPendingRouteImport } from './routes/signup.pending'
 import { Route as BusinessWalletRouteImport } from './routes/business.wallet'
 import { Route as BusinessSupportRouteImport } from './routes/business.support'
@@ -27,6 +29,13 @@ import { Route as AgentsRequestsRouteImport } from './routes/agents.requests'
 import { Route as AgentsMessagesRouteImport } from './routes/agents.messages'
 import { Route as AgentsInvoicesRouteImport } from './routes/agents.invoices'
 import { Route as AgentsComplianceRouteImport } from './routes/agents.compliance'
+import { Route as AdminWalletsRouteImport } from './routes/admin.wallets'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminTicketsRouteImport } from './routes/admin.tickets'
+import { Route as AdminRequestsRouteImport } from './routes/admin.requests'
+import { Route as AdminReportsRouteImport } from './routes/admin.reports'
+import { Route as AdminConfigRouteImport } from './routes/admin.config'
+import { Route as AdminCommunicationRouteImport } from './routes/admin.communication'
 import { Route as BusinessRequestsIdRouteImport } from './routes/business.requests.$id'
 import { Route as AgentsRequestsIdRouteImport } from './routes/agents.requests.$id'
 
@@ -50,6 +59,11 @@ const AgentsRoute = AgentsRouteImport.update({
   path: '/agents',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -64,6 +78,11 @@ const AgentsIndexRoute = AgentsIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AgentsRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
 } as any)
 const SignupPendingRoute = SignupPendingRouteImport.update({
   id: '/pending',
@@ -120,6 +139,41 @@ const AgentsComplianceRoute = AgentsComplianceRouteImport.update({
   path: '/compliance',
   getParentRoute: () => AgentsRoute,
 } as any)
+const AdminWalletsRoute = AdminWalletsRouteImport.update({
+  id: '/wallets',
+  path: '/wallets',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTicketsRoute = AdminTicketsRouteImport.update({
+  id: '/tickets',
+  path: '/tickets',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRequestsRoute = AdminRequestsRouteImport.update({
+  id: '/requests',
+  path: '/requests',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReportsRoute = AdminReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminConfigRoute = AdminConfigRouteImport.update({
+  id: '/config',
+  path: '/config',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCommunicationRoute = AdminCommunicationRouteImport.update({
+  id: '/communication',
+  path: '/communication',
+  getParentRoute: () => AdminRoute,
+} as any)
 const BusinessRequestsIdRoute = BusinessRequestsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -133,10 +187,18 @@ const AgentsRequestsIdRoute = AgentsRequestsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/agents': typeof AgentsRouteWithChildren
   '/business': typeof BusinessRouteWithChildren
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRouteWithChildren
+  '/admin/communication': typeof AdminCommunicationRoute
+  '/admin/config': typeof AdminConfigRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/requests': typeof AdminRequestsRoute
+  '/admin/tickets': typeof AdminTicketsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/wallets': typeof AdminWalletsRoute
   '/agents/compliance': typeof AgentsComplianceRoute
   '/agents/invoices': typeof AgentsInvoicesRoute
   '/agents/messages': typeof AgentsMessagesRoute
@@ -148,6 +210,7 @@ export interface FileRoutesByFullPath {
   '/business/support': typeof BusinessSupportRoute
   '/business/wallet': typeof BusinessWalletRoute
   '/signup/pending': typeof SignupPendingRoute
+  '/admin/': typeof AdminIndexRoute
   '/agents/': typeof AgentsIndexRoute
   '/business/': typeof BusinessIndexRoute
   '/agents/requests/$id': typeof AgentsRequestsIdRoute
@@ -157,6 +220,13 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRouteWithChildren
+  '/admin/communication': typeof AdminCommunicationRoute
+  '/admin/config': typeof AdminConfigRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/requests': typeof AdminRequestsRoute
+  '/admin/tickets': typeof AdminTicketsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/wallets': typeof AdminWalletsRoute
   '/agents/compliance': typeof AgentsComplianceRoute
   '/agents/invoices': typeof AgentsInvoicesRoute
   '/agents/messages': typeof AgentsMessagesRoute
@@ -168,6 +238,7 @@ export interface FileRoutesByTo {
   '/business/support': typeof BusinessSupportRoute
   '/business/wallet': typeof BusinessWalletRoute
   '/signup/pending': typeof SignupPendingRoute
+  '/admin': typeof AdminIndexRoute
   '/agents': typeof AgentsIndexRoute
   '/business': typeof BusinessIndexRoute
   '/agents/requests/$id': typeof AgentsRequestsIdRoute
@@ -176,10 +247,18 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/agents': typeof AgentsRouteWithChildren
   '/business': typeof BusinessRouteWithChildren
   '/signin': typeof SigninRoute
   '/signup': typeof SignupRouteWithChildren
+  '/admin/communication': typeof AdminCommunicationRoute
+  '/admin/config': typeof AdminConfigRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/requests': typeof AdminRequestsRoute
+  '/admin/tickets': typeof AdminTicketsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/wallets': typeof AdminWalletsRoute
   '/agents/compliance': typeof AgentsComplianceRoute
   '/agents/invoices': typeof AgentsInvoicesRoute
   '/agents/messages': typeof AgentsMessagesRoute
@@ -191,6 +270,7 @@ export interface FileRoutesById {
   '/business/support': typeof BusinessSupportRoute
   '/business/wallet': typeof BusinessWalletRoute
   '/signup/pending': typeof SignupPendingRoute
+  '/admin/': typeof AdminIndexRoute
   '/agents/': typeof AgentsIndexRoute
   '/business/': typeof BusinessIndexRoute
   '/agents/requests/$id': typeof AgentsRequestsIdRoute
@@ -200,10 +280,18 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/agents'
     | '/business'
     | '/signin'
     | '/signup'
+    | '/admin/communication'
+    | '/admin/config'
+    | '/admin/reports'
+    | '/admin/requests'
+    | '/admin/tickets'
+    | '/admin/users'
+    | '/admin/wallets'
     | '/agents/compliance'
     | '/agents/invoices'
     | '/agents/messages'
@@ -215,6 +303,7 @@ export interface FileRouteTypes {
     | '/business/support'
     | '/business/wallet'
     | '/signup/pending'
+    | '/admin/'
     | '/agents/'
     | '/business/'
     | '/agents/requests/$id'
@@ -224,6 +313,13 @@ export interface FileRouteTypes {
     | '/'
     | '/signin'
     | '/signup'
+    | '/admin/communication'
+    | '/admin/config'
+    | '/admin/reports'
+    | '/admin/requests'
+    | '/admin/tickets'
+    | '/admin/users'
+    | '/admin/wallets'
     | '/agents/compliance'
     | '/agents/invoices'
     | '/agents/messages'
@@ -235,6 +331,7 @@ export interface FileRouteTypes {
     | '/business/support'
     | '/business/wallet'
     | '/signup/pending'
+    | '/admin'
     | '/agents'
     | '/business'
     | '/agents/requests/$id'
@@ -242,10 +339,18 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/agents'
     | '/business'
     | '/signin'
     | '/signup'
+    | '/admin/communication'
+    | '/admin/config'
+    | '/admin/reports'
+    | '/admin/requests'
+    | '/admin/tickets'
+    | '/admin/users'
+    | '/admin/wallets'
     | '/agents/compliance'
     | '/agents/invoices'
     | '/agents/messages'
@@ -257,6 +362,7 @@ export interface FileRouteTypes {
     | '/business/support'
     | '/business/wallet'
     | '/signup/pending'
+    | '/admin/'
     | '/agents/'
     | '/business/'
     | '/agents/requests/$id'
@@ -265,6 +371,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AgentsRoute: typeof AgentsRouteWithChildren
   BusinessRoute: typeof BusinessRouteWithChildren
   SigninRoute: typeof SigninRoute
@@ -301,6 +408,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -321,6 +435,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/agents/'
       preLoaderRoute: typeof AgentsIndexRouteImport
       parentRoute: typeof AgentsRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/signup/pending': {
       id: '/signup/pending'
@@ -399,6 +520,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgentsComplianceRouteImport
       parentRoute: typeof AgentsRoute
     }
+    '/admin/wallets': {
+      id: '/admin/wallets'
+      path: '/wallets'
+      fullPath: '/admin/wallets'
+      preLoaderRoute: typeof AdminWalletsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/tickets': {
+      id: '/admin/tickets'
+      path: '/tickets'
+      fullPath: '/admin/tickets'
+      preLoaderRoute: typeof AdminTicketsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/requests': {
+      id: '/admin/requests'
+      path: '/requests'
+      fullPath: '/admin/requests'
+      preLoaderRoute: typeof AdminRequestsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reports': {
+      id: '/admin/reports'
+      path: '/reports'
+      fullPath: '/admin/reports'
+      preLoaderRoute: typeof AdminReportsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/config': {
+      id: '/admin/config'
+      path: '/config'
+      fullPath: '/admin/config'
+      preLoaderRoute: typeof AdminConfigRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/communication': {
+      id: '/admin/communication'
+      path: '/communication'
+      fullPath: '/admin/communication'
+      preLoaderRoute: typeof AdminCommunicationRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/business/requests/$id': {
       id: '/business/requests/$id'
       path: '/$id'
@@ -415,6 +585,30 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AdminRouteChildren {
+  AdminCommunicationRoute: typeof AdminCommunicationRoute
+  AdminConfigRoute: typeof AdminConfigRoute
+  AdminReportsRoute: typeof AdminReportsRoute
+  AdminRequestsRoute: typeof AdminRequestsRoute
+  AdminTicketsRoute: typeof AdminTicketsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminWalletsRoute: typeof AdminWalletsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminCommunicationRoute: AdminCommunicationRoute,
+  AdminConfigRoute: AdminConfigRoute,
+  AdminReportsRoute: AdminReportsRoute,
+  AdminRequestsRoute: AdminRequestsRoute,
+  AdminTicketsRoute: AdminTicketsRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminWalletsRoute: AdminWalletsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface AgentsRequestsRouteChildren {
   AgentsRequestsIdRoute: typeof AgentsRequestsIdRoute
@@ -495,6 +689,7 @@ const SignupRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   AgentsRoute: AgentsRouteWithChildren,
   BusinessRoute: BusinessRouteWithChildren,
   SigninRoute: SigninRoute,

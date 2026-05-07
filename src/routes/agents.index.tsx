@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusBadge } from "@/components/StatusBadge";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { AlertTriangle, Inbox, FileText, TrendingUp, ShieldCheck, Truck } from "lucide-react";
+import { AlertTriangle, Inbox, FileText, TrendingUp, ShieldCheck, Truck, Check, X } from "lucide-react";
 
 export const Route = createFileRoute("/agents/")({
   component: AgentsDashboard,

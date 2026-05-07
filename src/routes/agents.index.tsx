@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { StatusBadge } from "@/components/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { cn } from "@/lib/utils";
 import { AlertTriangle, Inbox, FileText, TrendingUp, ShieldCheck, Truck, Check, X } from "lucide-react";
 

@@ -83,10 +83,10 @@ function NewRequestPage() {
               onChange={(v) => logisticsAvailable && setServices((s) => ({ ...s, logistics: v }))}
               icon={Truck}
               title="الخدمات اللوجستية"
-              desc={logisticsAvailable ? "نقل وتخزين وتسليم." : "تتطلّب اختيار التخليص أولاً."}
+              desc={logisticsAvailable ? "نقل وتخزين وتسليم." : LOGISTICS_TOOLTIP}
               tone="muted"
               disabled={!logisticsAvailable}
-              tooltip="متاح كإضافة بعد التخليص"
+              tooltip={!logisticsAvailable ? LOGISTICS_TOOLTIP : undefined}
             />
           </div>
         )}

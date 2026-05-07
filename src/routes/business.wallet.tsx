@@ -98,9 +98,53 @@ function WalletPage() {
       </div>
 
       {/* Transactions */}
-      <section className="mt-8 rounded-2xl border border-border bg-card shadow-soft">
-        <div className="border-b border-border p-5">
+      <section className="mt-8 rounded-2xl border border-border bg-card shadow-soft print:border-0 print:shadow-none">
+        <div className="border-b border-border p-5 flex flex-wrap items-end justify-between gap-4 print:hidden">
           <h2 className="text-base font-bold">المعاملات الأخيرة</h2>
+          <div className="flex flex-wrap items-end gap-3">
+            <div className="grid gap-1.5">
+              <Label className="text-xs">من تاريخ</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" className={cn("w-[160px] justify-start font-normal", !from && "text-muted-foreground")}>
+                    <CalendarIcon className="ml-1.5 size-4" />
+                    {from ? format(from, "d MMM yyyy", { locale: ar }) : "اختر تاريخاً"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar mode="single" selected={from} onSelect={setFrom} initialFocus className={cn("p-3 pointer-events-auto")} />
+                </PopoverContent>
+              </Popover>
+            </div>
+            <div className="grid gap-1.5">
+              <Label className="text-xs">إلى تاريخ</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" className={cn("w-[160px] justify-start font-normal", !to && "text-muted-foreground")}>
+                    <CalendarIcon className="ml-1.5 size-4" />
+                    {to ? format(to, "d MMM yyyy", { locale: ar }) : "اختر تاريخاً"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar mode="single" selected={to} onSelect={setTo} initialFocus className={cn("p-3 pointer-events-auto")} />
+                </PopoverContent>
+              </Popover>
+            </div>
+            <div className="grid gap-1.5">
+              <Label className="text-xs">نوع المعاملة</Label>
+              <Select value={typeFilter} onValueChange={(v) => setTypeFilter(v as "all" | TxType)}>
+                <SelectTrigger className="w-[140px]"><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">الكل</SelectItem>
+                  <SelectItem value="credit">إيداع</SelectItem>
+                  <SelectItem value="debit">خصم</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <Button variant="outline" onClick={() => window.print()}>
+              <Printer className="ml-1.5 size-4" /> تصدير PDF
+            </Button>
+          </div>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -114,9 +158,11 @@ function WalletPage() {
               </tr>
             </thead>
             <tbody>
-              {tx.map((t, i) => (
+              {filtered.length === 0 ? (
+                <tr><td colSpan={5} className="p-8 text-center text-muted-foreground">لا توجد معاملات مطابقة للفلاتر.</td></tr>
+              ) : filtered.map((t, i) => (
                 <tr key={i} className="border-t border-border hover:bg-muted/40">
-                  <td className="p-4 text-muted-foreground">{t.date}</td>
+                  <td className="p-4 text-muted-foreground">{format(t.date, "d MMM yyyy", { locale: ar })}</td>
                   <td className="p-4">{t.desc}</td>
                   <td className="p-4">
                     {t.type === "credit" ? (

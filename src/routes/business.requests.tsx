@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusBadge } from "@/components/StatusBadge";
 import { Button } from "@/components/ui/button";
@@ -20,6 +20,7 @@ const rows = [
 ];
 
 function RequestsListPage() {
+  const navigate = useNavigate();
   return (
     <div>
       <PageHeader
@@ -78,9 +79,13 @@ function RequestsListPage() {
             </thead>
             <tbody>
               {rows.map((r) => (
-                <tr key={r.id} className="border-t border-border hover:bg-muted/40 cursor-pointer">
+                <tr
+                  key={r.id}
+                  onClick={() => navigate({ to: "/business/requests/$id", params: { id: r.id } })}
+                  className="border-t border-border hover:bg-muted/40 cursor-pointer"
+                >
                   <td className="p-4">
-                    <Link to="/business/requests/$id" params={{ id: r.id }} className="font-mono text-xs text-teal hover:underline">
+                    <Link to="/business/requests/$id" params={{ id: r.id }} onClick={(e) => e.stopPropagation()} className="font-mono text-xs text-teal hover:underline">
                       {r.id}
                     </Link>
                   </td>

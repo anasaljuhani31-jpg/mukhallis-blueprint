@@ -20,6 +20,7 @@ const rows = [
 ];
 
 function RequestsListPage() {
+  const navigate = useNavigate();
   return (
     <div>
       <PageHeader

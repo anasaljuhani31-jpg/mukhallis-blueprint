@@ -79,9 +79,13 @@ function RequestsListPage() {
             </thead>
             <tbody>
               {rows.map((r) => (
-                <tr key={r.id} className="border-t border-border hover:bg-muted/40 cursor-pointer">
+                <tr
+                  key={r.id}
+                  onClick={() => navigate({ to: "/business/requests/$id", params: { id: r.id } })}
+                  className="border-t border-border hover:bg-muted/40 cursor-pointer"
+                >
                   <td className="p-4">
-                    <Link to="/business/requests/$id" params={{ id: r.id }} className="font-mono text-xs text-teal hover:underline">
+                    <Link to="/business/requests/$id" params={{ id: r.id }} onClick={(e) => e.stopPropagation()} className="font-mono text-xs text-teal hover:underline">
                       {r.id}
                     </Link>
                   </td>

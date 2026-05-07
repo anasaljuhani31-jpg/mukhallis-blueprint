@@ -64,18 +64,80 @@ function AgentsDashboard() {
                 <th className="p-4 font-semibold">النوع</th>
                 <th className="p-4 font-semibold">التاريخ</th>
                 <th className="p-4 font-semibold">الحالة</th>
+                <th className="p-4 font-semibold">الإجراء</th>
               </tr>
             </thead>
             <tbody>
-              {assigned.map((r) => (
-                <tr key={r.id} className="border-t border-border hover:bg-muted/40">
-                  <td className="p-4 font-mono text-xs">{r.id}</td>
-                  <td className="p-4">{r.company}</td>
-                  <td className="p-4">{r.type}</td>
-                  <td className="p-4 text-muted-foreground">{r.date}</td>
-                  <td className="p-4"><StatusBadge status={r.status} /></td>
-                </tr>
-              ))}
+              {assigned.map((r) => {
+                const decision = decisions[r.id];
+                const isRejecting = rejectingId === r.id;
+                return (
+                  <>
+                    <tr key={r.id} className="border-t border-border hover:bg-muted/40">
+                      <td className="p-4 font-mono text-xs">{r.id}</td>
+                      <td className="p-4">{r.company}</td>
+                      <td className="p-4">{r.type}</td>
+                      <td className="p-4 text-muted-foreground">{r.date}</td>
+                      <td className="p-4"><StatusBadge status={r.status} /></td>
+                      <td className="p-4">
+                        {decision === "accepted" ? (
+                          <span className="text-xs font-semibold text-mint">تم القبول ✓</span>
+                        ) : decision === "rejected" ? (
+                          <span className="text-xs font-semibold text-destructive">تم الرفض</span>
+                        ) : (
+                          <div className="flex gap-1.5">
+                            <Button
+                              size="sm"
+                              className="bg-mint text-mint-foreground hover:bg-mint/90 h-7 px-2.5"
+                              onClick={() => setDecisions((d) => ({ ...d, [r.id]: "accepted" }))}
+                            >
+                              <Check className="size-3.5" /> قبول
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground h-7 px-2.5"
+                              onClick={() => { setRejectingId(r.id); setReason(""); }}
+                            >
+                              <X className="size-3.5" /> رفض
+                            </Button>
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                    {isRejecting && (
+                      <tr className="bg-muted/30 border-t border-border">
+                        <td colSpan={6} className="p-4">
+                          <div className="grid gap-2">
+                            <label className="text-xs font-semibold">سبب الرفض (مطلوب)</label>
+                            <Textarea
+                              required
+                              value={reason}
+                              onChange={(e) => setReason(e.target.value)}
+                              placeholder="يرجى توضيح سبب رفض الطلب…"
+                              rows={2}
+                            />
+                            <div className="flex gap-2 justify-end">
+                              <Button variant="outline" size="sm" onClick={() => setRejectingId(null)}>إلغاء</Button>
+                              <Button
+                                variant="destructive"
+                                size="sm"
+                                disabled={!reason.trim()}
+                                onClick={() => {
+                                  setDecisions((d) => ({ ...d, [r.id]: "rejected" }));
+                                  setRejectingId(null);
+                                }}
+                              >
+                                تأكيد الرفض
+                              </Button>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                  </>
+                );
+              })}
             </tbody>
           </table>
         </section>

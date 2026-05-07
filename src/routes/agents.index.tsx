@@ -135,7 +135,7 @@ function AgentsDashboard() {
                         </td>
                       </tr>
                     )}
-                  </>
+                  </Fragment>
                 );
               })}
             </tbody>

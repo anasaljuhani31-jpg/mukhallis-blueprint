@@ -12,11 +12,12 @@ export const Route = createFileRoute("/business/requests/$id")({
 });
 
 const stages = [
-  { label: "تم الإرسال", state: "done" as const },
-  { label: "تخصيص مخلّص", state: "done" as const },
-  { label: "عرض/فاتورة", state: "current" as const },
-  { label: "التنفيذ", state: "todo" as const },
-  { label: "التسليم", state: "todo" as const },
+  { label: "مُقدَّم", state: "done" as const },
+  { label: "قيد المراجعة", state: "done" as const },
+  { label: "تم التعيين", state: "done" as const },
+  { label: "فاتورة مرسلة", state: "current" as const },
+  { label: "مقبولة", state: "todo" as const },
+  { label: "منجز", state: "todo" as const },
 ];
 
 function RequestDetailPage() {

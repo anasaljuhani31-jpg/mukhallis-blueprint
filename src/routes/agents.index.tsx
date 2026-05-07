@@ -19,6 +19,9 @@ const assigned = [
 
 function AgentsDashboard() {
   const [view, setView] = useState<"clearance" | "logistics">("clearance");
+  const [decisions, setDecisions] = useState<Record<string, "accepted" | "rejected">>({});
+  const [rejectingId, setRejectingId] = useState<string | null>(null);
+  const [reason, setReason] = useState("");
   return (
     <div>
       <PageHeader

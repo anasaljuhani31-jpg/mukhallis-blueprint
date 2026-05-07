@@ -16,11 +16,20 @@ export const Route = createFileRoute("/business/new-request")({
 
 const steps = ["نوع الخدمة", "نوع العملية", "تفاصيل الشحنة", "الوثائق", "المراجعة"];
 
+// Mock: existing customs clearance requests for the current business
+const existingClearanceRequests: { id: string; status: "pending" | "approved" | "in_progress" | "completed" | "rejected" }[] = [
+  { id: "REQ-2086", status: "in_progress" },
+];
+
+const LOGISTICS_TOOLTIP = "متاح فقط بعد قبول طلب تخليص جمركي";
+
 function NewRequestPage() {
   const [step, setStep] = useState(0);
   const [services, setServices] = useState({ clearance: true, exemption: false, logistics: false });
   const [isImport, setIsImport] = useState(true);
-  const logisticsAvailable = services.clearance;
+  const logisticsAvailable = existingClearanceRequests.some(
+    (r) => r.status === "approved" || r.status === "in_progress",
+  );
 
   return (
     <div>

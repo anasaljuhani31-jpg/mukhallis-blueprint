@@ -1,23 +1,43 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
-import { ArrowDownCircle, ArrowUpCircle, Plus, Download, AlertTriangle } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { ArrowDownCircle, ArrowUpCircle, Plus, Download, AlertTriangle, CalendarIcon, Printer } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useMemo, useState } from "react";
+import { format } from "date-fns";
+import { ar } from "date-fns/locale";
 
 export const Route = createFileRoute("/business/wallet")({
   component: WalletPage,
 });
 
-const tx = [
-  { date: "12 أبريل 2026", desc: "دفع طلب REQ-2086", type: "debit", amount: "-12,400", balance: "46,200" },
-  { date: "10 أبريل 2026", desc: "شحن المحفظة", type: "credit", amount: "+50,000", balance: "58,600" },
-  { date: "05 أبريل 2026", desc: "دفع طلب REQ-2074", type: "debit", amount: "-5,300", balance: "8,600" },
-  { date: "02 أبريل 2026", desc: "استرداد جزئي REQ-2069", type: "credit", amount: "+1,200", balance: "13,900" },
-] as const;
+type TxType = "credit" | "debit";
+const tx: { date: Date; desc: string; type: TxType; amount: string; balance: string }[] = [
+  { date: new Date(2026, 3, 12), desc: "دفع طلب REQ-2086", type: "debit", amount: "-12,400", balance: "46,200" },
+  { date: new Date(2026, 3, 10), desc: "شحن المحفظة", type: "credit", amount: "+50,000", balance: "58,600" },
+  { date: new Date(2026, 3, 5), desc: "دفع طلب REQ-2074", type: "debit", amount: "-5,300", balance: "8,600" },
+  { date: new Date(2026, 3, 2), desc: "استرداد جزئي REQ-2069", type: "credit", amount: "+1,200", balance: "13,900" },
+];
 
 function WalletPage() {
   const balance = 46200; // demo
   const negative = balance < 0;
+  const [from, setFrom] = useState<Date | undefined>();
+  const [to, setTo] = useState<Date | undefined>();
+  const [typeFilter, setTypeFilter] = useState<"all" | TxType>("all");
+
+  const filtered = useMemo(() => {
+    return tx.filter((t) => {
+      if (from && t.date < from) return false;
+      if (to && t.date > to) return false;
+      if (typeFilter !== "all" && t.type !== typeFilter) return false;
+      return true;
+    });
+  }, [from, to, typeFilter]);
 
   return (
     <div>

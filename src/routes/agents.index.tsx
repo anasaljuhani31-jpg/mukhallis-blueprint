@@ -72,7 +72,7 @@ function AgentsDashboard() {
                 const decision = decisions[r.id];
                 const isRejecting = rejectingId === r.id;
                 return (
-                  <>
+                  <Fragment key={r.id}>
                     <tr key={r.id} className="border-t border-border hover:bg-muted/40">
                       <td className="p-4 font-mono text-xs">{r.id}</td>
                       <td className="p-4">{r.company}</td>

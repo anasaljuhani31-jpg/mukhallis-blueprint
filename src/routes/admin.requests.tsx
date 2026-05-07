@@ -84,7 +84,7 @@ function AdminRequests() {
               <Input dir="ltr" defaultValue="11600" disabled />
             </div>
             <div className="grid gap-1.5">
-              <Label>هامش المنصّة (%)</Label>
+              <Label>هامش المنصة %</Label>
               <Input dir="ltr" defaultValue="6.5" />
             </div>
             <div className="grid gap-1.5">

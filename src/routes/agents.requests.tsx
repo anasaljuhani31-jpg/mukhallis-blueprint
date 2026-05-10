@@ -57,15 +57,23 @@ function AgentsRequests() {
                   {!it.locked && !isRejected && (
                     <>
                       <Button
+                        type="button"
                         variant="outline"
                         className="border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
-                        onClick={() => setRejectingId(isRejecting ? null : it.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setRejectingId((prev) => (prev === it.id ? null : it.id));
+                        }}
                       >
                         رفض
                       </Button>
                       <Button
+                        type="button"
                         className="bg-mint text-mint-foreground hover:bg-mint/90 shadow-elegant"
-                        onClick={() => navigate({ to: "/agents/requests/$id", params: { id: it.id } })}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate({ to: "/agents/requests/$id", params: { id: it.id } });
+                        }}
                       >
                         قبول وتقديم عرض <ChevronLeft className="mr-1 size-4" />
                       </Button>

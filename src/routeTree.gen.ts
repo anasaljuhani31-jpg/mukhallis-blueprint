@@ -21,7 +21,6 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as SignupPendingRouteImport } from './routes/signup.pending'
 import { Route as BusinessWalletRouteImport } from './routes/business.wallet'
 import { Route as BusinessSupportRouteImport } from './routes/business.support'
-import { Route as BusinessRequestsRouteImport } from './routes/business.requests'
 import { Route as BusinessProfileRouteImport } from './routes/business.profile'
 import { Route as BusinessNewRequestRouteImport } from './routes/business.new-request'
 import { Route as AgentsSignupRouteImport } from './routes/agents.signup'
@@ -36,6 +35,7 @@ import { Route as AdminRequestsRouteImport } from './routes/admin.requests'
 import { Route as AdminReportsRouteImport } from './routes/admin.reports'
 import { Route as AdminConfigRouteImport } from './routes/admin.config'
 import { Route as AdminCommunicationRouteImport } from './routes/admin.communication'
+import { Route as BusinessRequestsIndexRouteImport } from './routes/business.requests.index'
 import { Route as BusinessRequestsIdRouteImport } from './routes/business.requests.$id'
 import { Route as AgentsRequestsIdRouteImport } from './routes/agents.requests.$id'
 
@@ -97,11 +97,6 @@ const BusinessWalletRoute = BusinessWalletRouteImport.update({
 const BusinessSupportRoute = BusinessSupportRouteImport.update({
   id: '/support',
   path: '/support',
-  getParentRoute: () => BusinessRoute,
-} as any)
-const BusinessRequestsRoute = BusinessRequestsRouteImport.update({
-  id: '/requests',
-  path: '/requests',
   getParentRoute: () => BusinessRoute,
 } as any)
 const BusinessProfileRoute = BusinessProfileRouteImport.update({
@@ -174,10 +169,15 @@ const AdminCommunicationRoute = AdminCommunicationRouteImport.update({
   path: '/communication',
   getParentRoute: () => AdminRoute,
 } as any)
+const BusinessRequestsIndexRoute = BusinessRequestsIndexRouteImport.update({
+  id: '/requests/',
+  path: '/requests/',
+  getParentRoute: () => BusinessRoute,
+} as any)
 const BusinessRequestsIdRoute = BusinessRequestsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => BusinessRequestsRoute,
+  id: '/requests/$id',
+  path: '/requests/$id',
+  getParentRoute: () => BusinessRoute,
 } as any)
 const AgentsRequestsIdRoute = AgentsRequestsIdRouteImport.update({
   id: '/$id',
@@ -206,7 +206,6 @@ export interface FileRoutesByFullPath {
   '/agents/signup': typeof AgentsSignupRoute
   '/business/new-request': typeof BusinessNewRequestRoute
   '/business/profile': typeof BusinessProfileRoute
-  '/business/requests': typeof BusinessRequestsRouteWithChildren
   '/business/support': typeof BusinessSupportRoute
   '/business/wallet': typeof BusinessWalletRoute
   '/signup/pending': typeof SignupPendingRoute
@@ -215,6 +214,7 @@ export interface FileRoutesByFullPath {
   '/business/': typeof BusinessIndexRoute
   '/agents/requests/$id': typeof AgentsRequestsIdRoute
   '/business/requests/$id': typeof BusinessRequestsIdRoute
+  '/business/requests/': typeof BusinessRequestsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -234,7 +234,6 @@ export interface FileRoutesByTo {
   '/agents/signup': typeof AgentsSignupRoute
   '/business/new-request': typeof BusinessNewRequestRoute
   '/business/profile': typeof BusinessProfileRoute
-  '/business/requests': typeof BusinessRequestsRouteWithChildren
   '/business/support': typeof BusinessSupportRoute
   '/business/wallet': typeof BusinessWalletRoute
   '/signup/pending': typeof SignupPendingRoute
@@ -243,6 +242,7 @@ export interface FileRoutesByTo {
   '/business': typeof BusinessIndexRoute
   '/agents/requests/$id': typeof AgentsRequestsIdRoute
   '/business/requests/$id': typeof BusinessRequestsIdRoute
+  '/business/requests': typeof BusinessRequestsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -266,7 +266,6 @@ export interface FileRoutesById {
   '/agents/signup': typeof AgentsSignupRoute
   '/business/new-request': typeof BusinessNewRequestRoute
   '/business/profile': typeof BusinessProfileRoute
-  '/business/requests': typeof BusinessRequestsRouteWithChildren
   '/business/support': typeof BusinessSupportRoute
   '/business/wallet': typeof BusinessWalletRoute
   '/signup/pending': typeof SignupPendingRoute
@@ -275,6 +274,7 @@ export interface FileRoutesById {
   '/business/': typeof BusinessIndexRoute
   '/agents/requests/$id': typeof AgentsRequestsIdRoute
   '/business/requests/$id': typeof BusinessRequestsIdRoute
+  '/business/requests/': typeof BusinessRequestsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -299,7 +299,6 @@ export interface FileRouteTypes {
     | '/agents/signup'
     | '/business/new-request'
     | '/business/profile'
-    | '/business/requests'
     | '/business/support'
     | '/business/wallet'
     | '/signup/pending'
@@ -308,6 +307,7 @@ export interface FileRouteTypes {
     | '/business/'
     | '/agents/requests/$id'
     | '/business/requests/$id'
+    | '/business/requests/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -327,7 +327,6 @@ export interface FileRouteTypes {
     | '/agents/signup'
     | '/business/new-request'
     | '/business/profile'
-    | '/business/requests'
     | '/business/support'
     | '/business/wallet'
     | '/signup/pending'
@@ -336,6 +335,7 @@ export interface FileRouteTypes {
     | '/business'
     | '/agents/requests/$id'
     | '/business/requests/$id'
+    | '/business/requests'
   id:
     | '__root__'
     | '/'
@@ -358,7 +358,6 @@ export interface FileRouteTypes {
     | '/agents/signup'
     | '/business/new-request'
     | '/business/profile'
-    | '/business/requests'
     | '/business/support'
     | '/business/wallet'
     | '/signup/pending'
@@ -367,6 +366,7 @@ export interface FileRouteTypes {
     | '/business/'
     | '/agents/requests/$id'
     | '/business/requests/$id'
+    | '/business/requests/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -462,13 +462,6 @@ declare module '@tanstack/react-router' {
       path: '/support'
       fullPath: '/business/support'
       preLoaderRoute: typeof BusinessSupportRouteImport
-      parentRoute: typeof BusinessRoute
-    }
-    '/business/requests': {
-      id: '/business/requests'
-      path: '/requests'
-      fullPath: '/business/requests'
-      preLoaderRoute: typeof BusinessRequestsRouteImport
       parentRoute: typeof BusinessRoute
     }
     '/business/profile': {
@@ -569,12 +562,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCommunicationRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/business/requests/': {
+      id: '/business/requests/'
+      path: '/requests'
+      fullPath: '/business/requests/'
+      preLoaderRoute: typeof BusinessRequestsIndexRouteImport
+      parentRoute: typeof BusinessRoute
+    }
     '/business/requests/$id': {
       id: '/business/requests/$id'
-      path: '/$id'
+      path: '/requests/$id'
       fullPath: '/business/requests/$id'
       preLoaderRoute: typeof BusinessRequestsIdRouteImport
-      parentRoute: typeof BusinessRequestsRoute
+      parentRoute: typeof BusinessRoute
     }
     '/agents/requests/$id': {
       id: '/agents/requests/$id'
@@ -643,33 +643,24 @@ const AgentsRouteChildren: AgentsRouteChildren = {
 const AgentsRouteWithChildren =
   AgentsRoute._addFileChildren(AgentsRouteChildren)
 
-interface BusinessRequestsRouteChildren {
-  BusinessRequestsIdRoute: typeof BusinessRequestsIdRoute
-}
-
-const BusinessRequestsRouteChildren: BusinessRequestsRouteChildren = {
-  BusinessRequestsIdRoute: BusinessRequestsIdRoute,
-}
-
-const BusinessRequestsRouteWithChildren =
-  BusinessRequestsRoute._addFileChildren(BusinessRequestsRouteChildren)
-
 interface BusinessRouteChildren {
   BusinessNewRequestRoute: typeof BusinessNewRequestRoute
   BusinessProfileRoute: typeof BusinessProfileRoute
-  BusinessRequestsRoute: typeof BusinessRequestsRouteWithChildren
   BusinessSupportRoute: typeof BusinessSupportRoute
   BusinessWalletRoute: typeof BusinessWalletRoute
   BusinessIndexRoute: typeof BusinessIndexRoute
+  BusinessRequestsIdRoute: typeof BusinessRequestsIdRoute
+  BusinessRequestsIndexRoute: typeof BusinessRequestsIndexRoute
 }
 
 const BusinessRouteChildren: BusinessRouteChildren = {
   BusinessNewRequestRoute: BusinessNewRequestRoute,
   BusinessProfileRoute: BusinessProfileRoute,
-  BusinessRequestsRoute: BusinessRequestsRouteWithChildren,
   BusinessSupportRoute: BusinessSupportRoute,
   BusinessWalletRoute: BusinessWalletRoute,
   BusinessIndexRoute: BusinessIndexRoute,
+  BusinessRequestsIdRoute: BusinessRequestsIdRoute,
+  BusinessRequestsIndexRoute: BusinessRequestsIndexRoute,
 }
 
 const BusinessRouteWithChildren = BusinessRoute._addFileChildren(
@@ -698,3 +689,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

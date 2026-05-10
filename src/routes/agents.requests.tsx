@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusBadge } from "@/components/StatusBadge";
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,6 @@ const items = [
 ];
 
 function AgentsRequests() {
-  const navigate = useNavigate();
   const [rejectingId, setRejectingId] = useState<string | null>(null);
   const [reasons, setReasons] = useState<Record<string, string>>({});
   const [rejected, setRejected] = useState<Record<string, boolean>>({});
@@ -68,14 +67,12 @@ function AgentsRequests() {
                         رفض
                       </Button>
                       <Button
-                        type="button"
+                        asChild
                         className="bg-mint text-mint-foreground hover:bg-mint/90 shadow-elegant"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate({ to: "/agents/requests/$id", params: { id: it.id } });
-                        }}
                       >
-                        قبول وتقديم عرض <ChevronLeft className="mr-1 size-4" />
+                        <Link to="/agents/requests/$id" params={{ id: it.id }}>
+                          قبول وتقديم عرض <ChevronLeft className="mr-1 size-4" />
+                        </Link>
                       </Button>
                     </>
                   )}

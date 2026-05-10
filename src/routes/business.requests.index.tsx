@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Download, Search } from "lucide-react";
 
-export const Route = createFileRoute("/business/requests")({
+export const Route = createFileRoute("/business/requests/")({
   component: RequestsListPage,
 });
 

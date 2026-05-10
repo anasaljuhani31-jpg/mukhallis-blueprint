@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusBadge } from "@/components/StatusBadge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Lock, ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -66,14 +66,16 @@ function AgentsRequests() {
                       >
                         رفض
                       </Button>
-                      <Button
-                        asChild
-                        className="bg-mint text-mint-foreground hover:bg-mint/90 shadow-elegant"
+                      <Link
+                        to="/agents/requests/$id"
+                        params={{ id: it.id }}
+                        className={cn(
+                          buttonVariants(),
+                          "bg-mint text-mint-foreground hover:bg-mint/90 shadow-elegant",
+                        )}
                       >
-                        <Link to="/agents/requests/$id" params={{ id: it.id }}>
-                          قبول وتقديم عرض <ChevronLeft className="mr-1 size-4" />
-                        </Link>
-                      </Button>
+                        قبول وتقديم عرض <ChevronLeft className="mr-1 size-4" />
+                      </Link>
                     </>
                   )}
                   {isRejected && (
